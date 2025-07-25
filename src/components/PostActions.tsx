@@ -6,6 +6,8 @@ import Link from "next/link";
 import { ListAllPostsRow } from "@/lib/definitions";
 import { toast } from "sonner";
 
+const domain = "https://api.soldbyghost.com";
+
 export default function PostActions({ post }: { post: ListAllPostsRow }) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showPublishModal, setShowPublishModal] = useState(false);
@@ -13,7 +15,7 @@ export default function PostActions({ post }: { post: ListAllPostsRow }) {
   const handleDelete = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/posts/delete/${post.ID}`,
+        `${domain}/api/posts/delete/${post.ID}`,
         {
           method: "DELETE",
         }
@@ -33,7 +35,7 @@ export default function PostActions({ post }: { post: ListAllPostsRow }) {
   const handlePublish = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/posts/publish/${post.ID}`,
+        `${domain}/api/posts/publish/${post.ID}`,
         {
           method: "POST",
         }
@@ -113,7 +115,7 @@ export default function PostActions({ post }: { post: ListAllPostsRow }) {
               Confirm Delete
             </h3>
             <p className="mb-4">
-              Are you sure you want to delete "{post.Title}"?
+              Are you sure you want to delete &quot;{post.Title}&quot;?
             </p>
             <div className="flex gap-4">
               <button

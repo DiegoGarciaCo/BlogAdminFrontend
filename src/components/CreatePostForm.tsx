@@ -19,6 +19,8 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 
+const domain = "https://api.soldbyghost.com";
+
 // Zod Schemas
 const draftPostSchema = z.object({
   title: z.string().optional(),
@@ -326,7 +328,7 @@ export default function CreatePostForm() {
     };
 
     try {
-      const postResponse = await fetch(`http://localhost:8080${endpoint}`, {
+      const postResponse = await fetch(`${domain}${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -351,7 +353,7 @@ export default function CreatePostForm() {
         formData.append("file", data.thumbnail);
 
         const thumbnailResponse = await fetch(
-          `http://localhost:8080/api/posts/thumbnail/${postId}`,
+          `${domain}/api/posts/thumbnail/${postId}`,
           {
             method: "POST",
             body: formData,

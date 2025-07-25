@@ -5,6 +5,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { toast } from "sonner";
 
+const domain = "https://api.soldbyghost.com";
+
 const loginSchema = z.object({
   username: z.string().min(1, "Username is required"),
   password: z.string().min(1, "Password is required"),
@@ -25,9 +27,10 @@ export default function Login() {
     },
   });
 
+
   async function onSubmit(data: LoginFormData) {
     try {
-      const res = await fetch("https://api.soldbyghost.com/api/auth/login", {
+      const res = await fetch(`${domain}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include", // Ensure cookies are sent/received
@@ -45,6 +48,7 @@ export default function Login() {
       }
     } catch (error) {
       toast.error("Unexpected Error");
+      console.error("Login error:", error);
     }
   }
 

@@ -1,8 +1,10 @@
 import { GetPostBySlugRow, ListAllPostsRow } from "./definitions";
 
+const domain = "https://api.soldbyghost.com";
+
 export async function fetchPosts(): Promise<ListAllPostsRow[]> {
   try {
-    const response = await fetch("http://localhost:8080/api/posts");
+    const response = await fetch(`${domain}/api/posts`);
     if (!response.ok) {
       return [];
     }
@@ -10,10 +12,10 @@ export async function fetchPosts(): Promise<ListAllPostsRow[]> {
     if (!data) {
       return [];
     }
-    return data.map((post: any) => ({
+    return data.map((post: ListAllPostsRow) => ({
       ...post,
-      publishedAt: post.publishedAt ? new Date(post.publishedAt) : null,
-      createdAt: post.createdAt ? new Date(post.createdAt) : null,
+      publishedAt: post.PublishedAt.Valid ? new Date(post.PublishedAt.Time) : null,
+      createdAt: post.CreatedAt.Valid ? new Date(post.CreatedAt.Time) : null,
     }));
   } catch (error) {
     console.error("Fetch failed:", error);
@@ -23,7 +25,7 @@ export async function fetchPosts(): Promise<ListAllPostsRow[]> {
 
 export async function fetchPostBySlug(slug: string): Promise<GetPostBySlugRow> {
   try {
-    const response = await fetch(`http://localhost:8080/api/posts/${slug}`);
+    const response = await fetch(`${domain}/api/posts/${slug}`);
     const data = await response.json();
     return {
       ...data,

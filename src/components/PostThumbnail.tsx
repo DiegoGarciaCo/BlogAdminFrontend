@@ -4,6 +4,8 @@ import { ListAllPostsRow } from "@/lib/definitions";
 import React, { useState } from "react";
 import { toast } from "sonner";
 
+const domain = "https://api.soldbyghost.com"; 
+
 export function PostThumbnail({ post }: { post: ListAllPostsRow }) {
   const [uploading, setUploading] = useState(false);
 
@@ -19,7 +21,7 @@ export function PostThumbnail({ post }: { post: ListAllPostsRow }) {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/api/posts/thumbnail/${post.ID}`,
+        `${domain}/api/posts/thumbnail/${post.ID}`,
         {
           method: "POST",
           body: formData,

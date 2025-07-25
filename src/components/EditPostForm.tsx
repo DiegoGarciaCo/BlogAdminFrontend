@@ -1,6 +1,5 @@
 "use client";
 
-import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -19,6 +18,8 @@ import {
 } from "lucide-react";
 import { GetPostBySlugRow } from "@/lib/definitions";
 import { toast } from "sonner";
+
+const domain = "https://api.soldbyghost.com";
 
 // Zod Schemas
 const draftEditPostSchema = z.object({
@@ -278,7 +279,7 @@ export default function EditPostForm({ post }: { post: GetPostBySlugRow }) {
     const method = post.Thumbnail?.Valid ? "PUT" : "POST";
     try {
       const response = await fetch(
-        `http://localhost:8080/api/posts/thumbnail/${post.ID}`,
+        `${domain}/api/posts/thumbnail/${post.ID}`,
         {
           method,
           body: formData,
@@ -321,7 +322,7 @@ export default function EditPostForm({ post }: { post: GetPostBySlugRow }) {
         tags: tags,
       };
 
-      const postResponse = await fetch(`http://localhost:8080${endpoint}`, {
+      const postResponse = await fetch(`${domain}${endpoint}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -347,9 +348,6 @@ export default function EditPostForm({ post }: { post: GetPostBySlugRow }) {
     }
   };
 
-  useEffect(() => {
-    console.log(post);
-  }, []);
 
   return (
     <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
