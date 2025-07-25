@@ -8,6 +8,7 @@ async function getPosts(): Promise<ListAllPostsRow[]> {
 
 export default async function PostList() {
   const posts = await getPosts();
+  console.log("Fetched posts:", posts);
   return (
     <div className="mt-6">
       <PostFilter posts={posts} />

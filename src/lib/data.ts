@@ -12,6 +12,7 @@ export async function fetchPosts(): Promise<ListAllPostsRow[]> {
     if (!data) {
       return [];
     }
+    console.log("Data fetched:", data);
     return data.map((post: ListAllPostsRow) => ({
       ...post,
       PublishedAt: post.PublishedAt.Valid ? new Date(post.PublishedAt.Time) : null,
