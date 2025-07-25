@@ -1,7 +1,30 @@
 import { GetPostBySlugRow } from "./definitions";
+import { ListAllPostsRow } from "./definitions";
 
 const domain = "https://api.soldbyghost.com";
 
+export async function fetchPosts(): Promise<ListAllPostsRow[]> {
+  try {
+    const response = await fetch(`${domain}/api/posts`);
+    console.log(response.status, response.statusText);
+    if (!response.ok) {
+      return [];
+    }
+    const data = await response.json();
+    if (!data) {
+      return [];
+    }
+    console.log("Data fetched:", data);
+    return data.map((post: ListAllPostsRow) => ({
+      ...post,
+      PublishedAt: post.PublishedAt.Valid ? new Date(post.PublishedAt.Time) : null,
+      CreatedAt: post.CreatedAt.Valid ? new Date(post.CreatedAt.Time) : null,
+    }));
+  } catch (error) {
+    console.error("Fetch failed:", error);
+    throw error;
+  }
+}
 
 export async function fetchPostBySlug(slug: string): Promise<GetPostBySlugRow> {
   try {
