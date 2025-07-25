@@ -17,6 +17,8 @@ export default function PostFilter({ posts }: { posts: ListAllPostsRow[] }) {
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 10; // Adjustable
 
+  console.log("Posts:", posts);
+
   // Extract unique tags from posts
   const allTags = Array.from(
     new Set(posts.flatMap((post) => post.Tags || []))
@@ -33,6 +35,7 @@ export default function PostFilter({ posts }: { posts: ListAllPostsRow[] }) {
     const matchesTag = !tagFilter || (post.Tags || []).includes(tagFilter);
     return matchesSearch && matchesStatus && matchesTag;
   });
+  console.log("Filtered Posts:", filteredPosts);
 
   // Sort posts
   const sortedPosts = [...filteredPosts].sort((a, b) => {
@@ -58,6 +61,7 @@ export default function PostFilter({ posts }: { posts: ListAllPostsRow[] }) {
       return order * (aTime > bTime ? 1 : -1);
     }
   });
+  console.log("Sorted Posts:", sortedPosts);
 
   // Paginate posts
   const totalPosts = sortedPosts.length;
