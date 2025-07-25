@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic"; // Force dynamic rendering
 
 const domain = "https://api.soldbyghost.com";
 
-export async function fetchPosts(): Promise<ListAllPostsRow[]> {
+async function fetchPosts(): Promise<ListAllPostsRow[]> {
   try {
     const response = await fetch(`${domain}/api/posts`);
     if (!response.ok) {
