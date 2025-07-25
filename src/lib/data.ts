@@ -14,8 +14,8 @@ export async function fetchPosts(): Promise<ListAllPostsRow[]> {
     }
     return data.map((post: ListAllPostsRow) => ({
       ...post,
-      publishedAt: post.PublishedAt.Valid ? new Date(post.PublishedAt.Time) : null,
-      createdAt: post.CreatedAt.Valid ? new Date(post.CreatedAt.Time) : null,
+      PublishedAt: post.PublishedAt.Valid ? new Date(post.PublishedAt.Time) : null,
+      CreatedAt: post.CreatedAt.Valid ? new Date(post.CreatedAt.Time) : null,
     }));
   } catch (error) {
     console.error("Fetch failed:", error);

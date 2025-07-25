@@ -3,7 +3,6 @@ export interface ListAllPostsRow {
   Title: string; // Non-nullable string
   Slug: string; // Non-nullable string
   Excerpt: nullable; // Nullable string
-  Content: string;
   Author: nullable; // Nullable string
   PublishedAt: nullableDate; // Nullable date (or string | null if ISO string)
   Thumbnail: nullable;
