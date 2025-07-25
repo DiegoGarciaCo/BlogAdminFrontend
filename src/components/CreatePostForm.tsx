@@ -42,11 +42,15 @@ const basePostSchema = z.object({
   thumbnail: z.any().optional(),
 });
 
-const publishPostSchema = basePostSchema.extend({
-  thumbnail: z.instanceof(File, {
-    message: "Thumbnail is required to publish",
-  }),
-});
+const publishPostSchema =
+  typeof window !== "undefined"
+    ? basePostSchema.extend({
+        thumbnail: z.instanceof(File, {
+          message: "Thumbnail is required to publish",
+        }),
+      })
+    : basePostSchema;
+
 
 type CreatePostFormData = z.infer<typeof draftPostSchema>;
 
