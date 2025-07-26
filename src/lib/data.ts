@@ -3,15 +3,15 @@ import { ListAllPostsRow } from "./definitions";
 
 const domain = "https://api.soldbyghost.com";
 
-export async function fetchPosts(): Promise<ListAllPostsRow[]> {
+export async function fetchPosts(cookieHeader: string): Promise<ListAllPostsRow[]> {
   try {
     const response = await fetch(`${domain}/api/posts`, {
                                 method: "GET",
                                 headers: {
                                   "Content-Type": "application/json",
-                                  "Accept": "application/json"
+                                  "Accept": "application/json",
+                                  Cookie: cookieHeader,
                                 },
-                                credentials: "include",
                                 cache: "no-store",
 
     });

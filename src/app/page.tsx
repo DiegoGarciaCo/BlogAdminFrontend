@@ -3,12 +3,17 @@
 import PostList from "@/components/PostList";
 import SidebarNav from "@/components/Sidebar";
 import { fetchPosts } from "@/lib/data";
+import { cookies } from "next/headers";
 
 export const dynamic = "force-dynamic"; // Force dynamic rendering
 
 
 export default async function AdminHome() {
-    const posts = await fetchPosts();
+    const cookieStore = await cookies();
+    const allCookies = cookieStore.getAll();
+    const cookieHeader = allCookies.map((c) => `${c.name}=${c.value}`).join("; ");
+
+    const posts = await fetchPosts(cookieHeader);
     console.log("Posts fetched:", posts);
   return (
     <main className="flex min-h-screen bg-brand-neutral text-brand-primary">
