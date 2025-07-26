@@ -18,6 +18,7 @@ export default function PostActions({ post }: { post: ListAllPostsRow }) {
         `${domain}/api/posts/delete/${post.ID}`,
         {
           method: "DELETE",
+          credentials: "include",
         }
       );
       if (response.ok) {
@@ -38,6 +39,7 @@ export default function PostActions({ post }: { post: ListAllPostsRow }) {
         `${domain}/api/posts/publish/${post.ID}`,
         {
           method: "POST",
+          credentials: "include",
         }
       );
       if (response.ok) {

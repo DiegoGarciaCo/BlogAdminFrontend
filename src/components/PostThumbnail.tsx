@@ -25,6 +25,7 @@ export function PostThumbnail({ post }: { post: ListAllPostsRow }) {
         {
           method: "POST",
           body: formData,
+          credentials: "include", // Include credentials for session
         }
       );
       if (response.ok) {

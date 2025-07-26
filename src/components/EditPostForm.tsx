@@ -283,6 +283,7 @@ export default function EditPostForm({ post }: { post: GetPostBySlugRow }) {
         {
           method,
           body: formData,
+          credentials: "include",
         }
       );
 
@@ -326,6 +327,7 @@ export default function EditPostForm({ post }: { post: GetPostBySlugRow }) {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
+        credentials: "include",
       });
 
       if (!postResponse.ok) {
