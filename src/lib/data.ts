@@ -5,7 +5,16 @@ const domain = "https://api.soldbyghost.com";
 
 export async function fetchPosts(): Promise<ListAllPostsRow[]> {
   try {
-    const response = await fetch(`${domain}/api/posts`);
+    const response = await fetch(`${domain}/api/posts`, {
+                                method: "GET",
+                                headers: {
+                                  "Content-Type": "application/json",
+                                  "Accept": "application/json"
+                                },
+                                credentials: "include",
+                                cache: "no-store",
+
+    });
     console.log(response.status, response.statusText);
     if (!response.ok) {
       return [];
